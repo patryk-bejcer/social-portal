@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row users-show">
             <div class="col-md-3 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -13,6 +13,7 @@
                     </div>
 
                     <div class="panel-body text-center">
+                        <img class="img-responsive img-thumbnail" src="{{ url('images/user-avatar/' . $user->id) . '/200' }}" alt="">
                         <a href="{{ url('/users') . '/' . $user->id }}"><h3>{{ $user->name }}</h3></a>
                         @if( $user->sex == 'm')
                             Mężczyzna

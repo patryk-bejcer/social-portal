@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
+
 class UsersController extends Controller
 {
 
@@ -83,10 +84,15 @@ class UsersController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->sex = $request->sex;
+
+        if($request->file('avatar')){
+            $upload_path = 'public/users/' . $id  . '/avatars';
+            $path = $request->file('avatar')->store($upload_path);
+            $avatar_filename = str_replace($upload_path . '/', '', $path);
+            $user->avatar = $avatar_filename;
+        }
+
         $user->save();
-
-
-
         return back();
     }
 
