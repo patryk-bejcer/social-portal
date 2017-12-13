@@ -17,8 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/search', 'SearchController@users');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/users', 'UsersController', ['except' => ['index', 'create', 'store', 'destroy']]);
 
 Route::get('/images/user-avatar/{id}/{size}', 'ImagesController@user_avatar');
+
+Route::resource('/', 'FriendsController');
