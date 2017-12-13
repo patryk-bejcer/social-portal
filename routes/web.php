@@ -25,4 +25,4 @@ Route::resource('/users', 'UsersController', ['except' => ['index', 'create', 's
 
 Route::get('/images/user-avatar/{id}/{size}', 'ImagesController@user_avatar');
 
-Route::resource('/', 'FriendsController');
+Route::resource('/friends', 'FriendsController', ['except' => ['edit', 'show', 'create']]);
