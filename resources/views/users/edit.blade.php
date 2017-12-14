@@ -75,6 +75,39 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                        <label for="">Numer telefonu</label>
+                                        <input name="phone" type="text" class="form-control" value="{{$user->phone}}" placeholder="Numer telefonu">
+
+                                        @if ($errors->has('phone'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('phone') }}</strong>
+                                            </span>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                                        <label for="">Miejsce zamieszkania</label>
+                                        <input name="city" type="text" class="form-control" value="{{$user->city}}" placeholder="Miejsce zamieszkania">
+
+                                        @if ($errors->has('city'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('city') }}</strong>
+                                            </span>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-10 col-sm-offset-1">
                                     <button type="submit" class="btn btn-primary btn-sm pull-right">Zapisz zmiany</button>

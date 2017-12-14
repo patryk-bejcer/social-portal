@@ -79,6 +79,8 @@ class UsersController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->sex = $request->sex;
+        $user->phone = $request->phone;
+        $user->city = $request->city;
 
         if($request->file('avatar')){
             $upload_path = 'public/users/' . $id  . '/avatars';
