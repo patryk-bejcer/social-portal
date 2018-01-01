@@ -8,6 +8,7 @@
             @include('layouts.sidebar')
 
             <div class="col-md-7">
+                @if(Auth::check() && $user->id === Auth::id())
                 <div class="panel panel-default">
                     <div class="panel-body">
 
@@ -15,11 +16,12 @@
 
                     </div>
                 </div>
+                @endif
             </div>
 
             <div class="col-md-7">
             @foreach($posts as $post)
-                @include('posts.show')
+                @include('posts.single')
             @endforeach
             </div>
 
