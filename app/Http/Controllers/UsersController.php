@@ -28,7 +28,7 @@ class UsersController extends Controller
     {
 
         $user = User::findOrFail($id);
-        $posts = $user->posts()->orderBy('id', 'desc')->get();
+        $posts = $user->posts()->orderBy('id', 'desc')->paginate(5);
 
         return view('users.show', compact('user', 'posts'));
     }

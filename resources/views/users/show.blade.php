@@ -23,6 +23,9 @@
             @foreach($posts as $post)
                 @include('posts.single')
             @endforeach
+
+                {{ $posts->links() }}
+
             </div>
 
         </div>
