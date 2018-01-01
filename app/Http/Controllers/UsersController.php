@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,9 @@ class UsersController extends Controller
     {
 
         $user = User::findOrFail($id);
+        $posts = $user->posts()->orderBy('id', 'desc')->get();
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'posts'));
     }
 
     /**

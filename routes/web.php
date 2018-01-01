@@ -26,3 +26,12 @@ Route::resource('/users', 'UsersController', ['except' => ['index', 'create', 's
 Route::get('/images/user-avatar/{id}/{size}', 'ImagesController@user_avatar');
 
 Route::resource('/friends', 'FriendsController', ['except' => ['edit', 'show', 'create']]);
+Route::get('users/{user}/friends', 'FriendsController@index');
+Route::post('/friends/{friend}', 'FriendsController@add');
+Route::patch('/friends/{friend}', 'FriendsController@accept');
+Route::delete('/friends/{friend}','FriendsController@destroy');
+
+Route::get('/set','FriendsController@accept');
+
+
+Route::resource('/posts', 'PostsController', ['except' => ['index', 'create']]);

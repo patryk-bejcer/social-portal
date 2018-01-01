@@ -13,7 +13,7 @@ class SearchController extends Controller
     {
 
         $search_phrase = Input::get('q');
-        $search_results = User::where('name','LIKE', '%' . $search_phrase . '%')->paginate(12);
+        $search_results = User::where('name','LIKE', '%' . $search_phrase . '%')->paginate(24);
 
         return view('search.users', compact('search_results'));
     }
