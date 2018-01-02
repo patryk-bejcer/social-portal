@@ -12,9 +12,10 @@ use Illuminate\Validation\Rule;
 class UsersController extends Controller
 {
 
+
     public function __construct()
     {
-        $this->middleware('permission', ['except' => ['show']]);
+        $this->middleware('user_permission', ['except' => ['show']]);
     }
 
     /**

@@ -20,6 +20,7 @@
             </div>
 
             <div class="col-md-7">
+
             @foreach($posts as $post)
                 @include('posts.single')
             @endforeach
