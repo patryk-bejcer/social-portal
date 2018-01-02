@@ -21,6 +21,10 @@
 
             <div class="col-md-7">
 
+                @if ($posts->count() < 1)
+                    <h4>Brak postów</h4>
+                    @endif
+
             @foreach($posts as $post)
                 @include('posts.single')
             @endforeach

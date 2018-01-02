@@ -35,3 +35,5 @@ Route::get('/set','FriendsController@accept');
 
 
 Route::resource('/posts', 'PostsController', ['except' => ['index', 'create']]);
+
+Route::get('/wall', 'WallsController@index');
