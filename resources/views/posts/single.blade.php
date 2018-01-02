@@ -7,7 +7,7 @@
             <form class="pull-right" method="POST" action="{{ url('/posts/' . $post->id ) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <button style="background: transparent;margin: 0;padding: 0px;border: 0; padding-left: 5px;" class=""><a href="{{url('/posts/' . $post->id . '/edit')}}"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
+                <button onclick="return confirm('Czy na pewno chcesz usunąć post?')" style="background: transparent;margin: 0;padding: 0px;border: 0; padding-left: 5px;" class=""><a href="{{url('/posts/' . $post->id . '/edit')}}"><i class="fa fa-trash" aria-hidden="true"></i></a></button>
             </form>
             <div class="pull-right"><a href="{{url('/posts/' . $post->id . '/edit')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
         @endif
