@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/search', 'SearchController@users');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'WallsController@index');
 
 Route::resource('/users', 'UsersController', ['except' => ['index', 'create', 'store', 'destroy']]);
 

@@ -26,7 +26,7 @@ class WallsController extends Controller
 
         $posts = Post::whereIn('user_id', $friends_ids_array)
             ->orderBy('created_at', 'desc')
-            ->paginate(4);
+            ->paginate(10);
 
         return view('walls.index', compact('posts'));
 

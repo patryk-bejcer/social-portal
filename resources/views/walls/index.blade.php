@@ -22,7 +22,8 @@
                     @include('posts.single')
                 @endforeach
 
-                {{ $posts->links() }}
+                <div class="text-center">{{ $posts->links() }}</div>
+
 
             </div>
 

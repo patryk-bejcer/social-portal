@@ -58,12 +58,22 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
+
+
+
+                            <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Logowanie</a></li>
                             <li><a href="{{ route('register') }}">Rejestracja</a></li>
                         @else
-                            <li class="dropdown">
+
+                            <div class="pull-left" style="margin-top: 6px; margin-right: 5px;">
+                                <a href="{{ url('/users/' . Auth::id() )}}">
+                                    <img alt="Profil" title="Profil" style="padding:1px;" class="img-responsive img-circle img-thumbnail" src="{{ url('images/user-avatar/' . Auth::id()) . '/35' }}" alt="">
+                                </a>
+                            </div>
+
+                            <li class="dropdown pull-right">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     <span class="caret"></span>
                                 </a>
