@@ -30,7 +30,12 @@
             {{$post->content}}
         </div>
 
-
-
     </div>
+
+    <div class="panel-footer" style="padding-top:5px;">
+        @if (Auth::check())
+            @include('comments.create')
+        @endif
+    </div>
+
 </div>
