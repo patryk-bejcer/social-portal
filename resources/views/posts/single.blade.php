@@ -33,9 +33,30 @@
     </div>
 
     <div class="panel-footer" style="padding-top:5px;">
+
         @if (Auth::check())
             @include('comments.create')
         @endif
+
+
+        @foreach($post->comments as $comment)
+                <div class="row">
+                <div class="col-md-1">
+                    <img alt="Profil" title="Profil" style="padding:1px;" class="img-responsive img-circle" src="{{ url('images/user-avatar/' . Auth::id()) . '/65' }}" alt="">
+                </div>
+
+                <div class="col-md-8" >
+                    <p>{{$comment->content}}</p>
+                </div>
+                </div>
+            
+            @endforeach
+
     </div>
+
+
+
+
+
 
 </div>
