@@ -37,24 +37,10 @@
         @if (Auth::check())
             @include('comments.create')
         @endif
-    <div class="clearfix"></div>
 
-            <div class="">
         @foreach($post->comments as $comment)
-                <div class="row">
-                <div class="col-md-1" style="padding-right: 0;">
-                    <img alt="Profil" title="Profil" style="padding:1px; margin-top: 5px" class="img-responsive img-circle" src="{{ url('images/user-avatar/' . Auth::id()) . '/65' }}" alt="">
-                </div>
-
-                <div class="col-md-8" >
-                    <a href="">{{$comment->user->name}}</a>
-                    <p>{{$comment->content}}</p>
-                </div>
-                </div>
-                    <hr style="margin-top: 0px; margin-bottom: 5px;">
-            
-            @endforeach
-            </div>
+            @include('comments.include.single')
+        @endforeach
 
     </div>
 

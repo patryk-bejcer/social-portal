@@ -1,3 +1,6 @@
+<div class="row" style="margin-bottom:15px;">
+    <div class="col-md-12">
+
 <form action="{{ url('/comments') }}" method="POST">
     {{ csrf_field()  }}
     <div style="margin:0" class="form-group{{ $errors->has('post_' . $post->id .'_comment_content') ? ' has-error' : '' }}">
@@ -30,7 +33,7 @@
         </script>
 
         <input type="hidden" name="post_id" value="{{ $post->id }}">
-        <input style="margin-top:10px; visibility: hidden " type="submit" class="submit_on_enter btn btn-primary pull-right" value="Dodaj komentarz">
+        <input style="margin-top:10px; display:none " type="submit" class="submit_on_enter btn btn-primary pull-right" value="Dodaj komentarz">
         @if ($errors->has('post_' . $post->id .'_comment_content'))
             <span class="help-block">
                 <strong>{{ $errors->first('post_' . $post->id .'_comment_content') }}</strong>
@@ -38,3 +41,5 @@
         @endif
     </div>
 </form>
+    </div>
+</div>
