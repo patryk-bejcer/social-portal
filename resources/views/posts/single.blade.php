@@ -3,7 +3,7 @@
 
     <div class="panel-body">
 
-        @if (Auth::check() && Auth::id() === $post->user_id)
+        @if (Auth::check() && Auth::id() === $post->user_id || Auth::user()->role->type === 'admin')
             <form class="pull-right" method="POST" action="{{ url('/posts/' . $post->id ) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}

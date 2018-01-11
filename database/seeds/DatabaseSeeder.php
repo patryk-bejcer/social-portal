@@ -19,9 +19,19 @@ class DatabaseSeeder extends Seeder
 
         /* =============== VARIABLES =============== */
 
-        $number_of_users = 250;
-        $max_posts_per_user = 20;
+        $number_of_users = 40;
+        $max_posts_per_user = 15;
         $password = 'pass';
+        $max_comments_per_post = 2;
+
+        DB::table('roles')->insert([
+            'id' => '1',
+            'type' => 'admin',
+        ]);
+        DB::table('roles')->insert([
+            'id' => '2',
+            'type' => 'user',
+        ]);
 
         /* =============== USERS =============== */
 
@@ -33,6 +43,7 @@ class DatabaseSeeder extends Seeder
                     'name' => 'Patryk Bejcer',
                     'email' => 'patryk.bejcer@gmail.com',
                     'sex' => 'm',
+                    'role_id' => '1',
                     'password' => bcrypt($password),
                 ]);
 
@@ -60,6 +71,7 @@ class DatabaseSeeder extends Seeder
                     'sex' => $sex,
                     'avatar' => $avatar,
                     'password' => bcrypt($password),
+                    'role_id'   => '2',
                 ]);
 
             }
@@ -104,6 +116,16 @@ class DatabaseSeeder extends Seeder
                 ]);
 
                 /* COMMENTS */
+
+                for ($comment_id = 1; $comment_id <= $faker->numberBetween($min = 0, $max = $max_comments_per_post - 1); $i++) {
+
+                    DB::table('comments')->insert([
+                        'post_id' => $faker->numberBetween($min = 1, $max = ($number_of_users * $max_posts_per_user)/2),
+                        'user_id' => $faker->numberBetween($min = 1, $max = $number_of_users),
+                        'content' => $faker->paragraph($nbSentences = 1, $variableNbSentences = true),
+                        'created_at' => $faker->dateTimeThisYear($max = 'now'),
+                    ]);
+                }
 
                 /* END OF COMMENTS */
 

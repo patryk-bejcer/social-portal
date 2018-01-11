@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->date('birth')->nullable();
             $table->string('website', 50)->nullable();
             $table->string('avatar')->nullable();
+            $table->tinyInteger('role_id');
             $table->rememberToken();
             $table->timestamps();
         });

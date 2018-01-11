@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-11" >
-        @if (Auth::check() && Auth::id() === $comment->user_id)
+        @if (Auth::check() && Auth::id() === $comment->user_id || Auth::user()->role->type === 'admin')
             <form class="pull-right" method="POST" action="{{ url('/comments/' . $comment->id ) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
