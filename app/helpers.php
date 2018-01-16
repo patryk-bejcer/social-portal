@@ -33,3 +33,5 @@ function has_friend_invitation($friend_id)
         'accepted' => 0,
     ])->exists();
 }
+
+
