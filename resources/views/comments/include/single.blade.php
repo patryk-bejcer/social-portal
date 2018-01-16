@@ -1,6 +1,6 @@
 
 
-<div class="row" id="comment_{{ $comment->id }}">
+<div class="row {{ ($comment->trashed()) ? 'trashed' : ''}}" id="comment_{{ $comment->id }}">
 
 
     <div class="col-md-1" style="padding-right: 0;">
@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-11" >
-        @if (Auth::check() && Auth::id() === $comment->user_id || Auth::user()->role->type === 'admin')
+        @if (belongs_to_auth($comment->user_id) || is_admin())
             <form class="pull-right" method="POST" action="{{ url('/comments/' . $comment->id ) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
@@ -19,6 +19,9 @@
         <a href="{{url('/users/' . $comment->user->id)}}">{{$comment->user->name}}</a>
         <small>{{$comment->created_at}}</small>
         <p>{{$comment->content}}</p>
+            @if (Auth::check() && !$post->trashed())
+                @include('comments.include.likes')
+            @endif
     </div>
 </div>
 <hr style="margin-top: 0px; margin-bottom: 8px;">

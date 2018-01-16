@@ -1,9 +1,9 @@
 
-<div class="panel panel-default">
+<div class="panel panel-default{{ ($post->trashed()) ? ' trashed' : ''}}">
 
     <div class="panel-body">
 
-        @if (Auth::check() && Auth::id() === $post->user_id || Auth::user()->role->type === 'admin')
+        @if (belongs_to_auth($post->user_id) || is_admin())
             <form class="pull-right" method="POST" action="{{ url('/posts/' . $post->id ) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
@@ -11,6 +11,7 @@
             </form>
             <div class="pull-right"><a href="{{url('/posts/' . $post->id . '/edit')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
         @endif
+
 
 
         <div class="clearfix">
@@ -30,11 +31,18 @@
             {{$post->content}}
         </div>
 
+            <hr style="margin: 10px 0;">
+
+            @if (Auth::check() && !$post->trashed())
+                @include('posts.include.likes')
+            @endif
+
+
     </div>
 
     <div class="panel-footer" style="padding-top:5px;">
 
-        @if (Auth::check())
+        @if (Auth::check() && !$post->trashed())
             @include('comments.create')
         @endif
 

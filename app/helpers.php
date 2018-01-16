@@ -34,4 +34,12 @@ function has_friend_invitation($friend_id)
     ])->exists();
 }
 
+function belongs_to_auth($user_id){
+    return (Auth::check() && $user_id === Auth::id());
+}
+
+function is_admin(){
+    return (Auth::check() && Auth::user()->role->type === 'admin');
+}
+
 

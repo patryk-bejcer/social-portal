@@ -31,9 +31,22 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 //        $posts = $user->posts()->orderBy('id', 'desc')->paginate(5);
 
-        $posts = Post::with('comments.user')
-            ->where('user_id',$id)
-            ->orderBy('id', 'desc')->paginate(10);
+
+        if(is_admin()){
+            $posts = Post::with('comments.user')
+                ->with('likes')
+                ->with('comments.likes') //eager loading
+                ->where('user_id',$id)
+                ->orderBy('id', 'desc')
+                ->withTrashed()->paginate(10);
+        } else {
+            $posts = Post::with('comments.user')
+                ->with('likes')
+                ->with('comments.likes')
+                ->where('user_id',$id)
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        }
 
         return view('users.show', compact('user', 'posts'));
     }

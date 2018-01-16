@@ -10,4 +10,17 @@
   padding:0px;
 }
 
+.trashed{
+  opacity: .4;
+  transition: 0.5s;
+}
+
+.trashed:hover{
+  opacity: 1;
+}
+
+.like-btn{
+  font-size: 12px;
+}
+
 /*# sourceMappingURL=style.css.map */

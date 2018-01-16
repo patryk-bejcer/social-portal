@@ -46,7 +46,11 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        if (is_admin()) {
+            $post = Post::findOrFail($id)->withTrashed();
+        } else {
+            $post = Post::findOrFail($id);
+        }
 
         return view('posts.show', compact('post'));
     }
@@ -60,7 +64,11 @@ class PostsController extends Controller
     public function edit($id)
     {
 
-        $post = Post::findOrFail($id);
+        if (is_admin()) {
+            $post = Post::withTrashed()->findOrFail($id);
+        } else {
+            $post = Post::findOrFail($id);
+        }
 
         return view('posts.edit', compact('post'));
     }
@@ -82,11 +90,16 @@ class PostsController extends Controller
             'min' => 'Pole musi mieć minimum :min znaków',
         ]);
 
-        $post = Post::findOrFail($id);
+        if (is_admin()) {
+            $post = Post::withTrashed()->findOrFail($id);
+        } else {
+            $post = Post::findOrFail($id);
+        }
+
         $post->content = $request->content;
         $post->save();
 
-        return redirect('/posts/' . $id);
+        return back();
     }
 
     /**
@@ -97,9 +110,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        Post::where([
-            'id' => $id,
-        ])->delete();
+        $post = Post::find($id);
+        $post->delete();
+        $post->comments()->delete();
 
         return back();
     }
