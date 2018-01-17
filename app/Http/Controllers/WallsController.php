@@ -15,6 +15,8 @@ class WallsController extends Controller
 
     public function index(){
 
+        $user = Auth::user();
+
         $friends = Auth::user()->friends();
 
         $friends_ids_array = [];
@@ -43,7 +45,7 @@ class WallsController extends Controller
 
 
 
-        return view('walls.index', compact('posts'));
+        return view('walls.index', compact('posts', 'user'));
 
     }
 }

@@ -4,7 +4,10 @@
     <div class="container">
         <div class="row users-show">
 
-            <div class="col-md-6 col-md-offset-3">
+            <!-- Include layout sidebar -->
+            @include('layouts.sidebar')
+
+            <div class="col-md-6 ">
                 @if(Auth::check())
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -16,7 +19,7 @@
                 @endif
             </div>
 
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 ">
 
                 @foreach($posts as $post)
                     @include('posts.single')

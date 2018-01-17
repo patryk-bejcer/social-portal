@@ -47,7 +47,7 @@ class PostsController extends Controller
     public function show($id)
     {
         if (is_admin()) {
-            $post = Post::findOrFail($id)->withTrashed();
+            $post = Post::withTrashed()->findOrFail($id);
         } else {
             $post = Post::findOrFail($id);
         }

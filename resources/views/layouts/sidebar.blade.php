@@ -12,6 +12,11 @@
             <a href="{{ url('/users') . '/' . $user->id }}"><h3>{{ $user->name }}</h3></a>
 
             <p>
+
+            <p>
+                <a href="{{url('/users/' . $user->id . '/gallery')}}">Zdjęcia ({{$user->images->count()}})</a>
+            </p>
+
             @if( $user->sex == 'm')
                 Mężczyzna
             @else
@@ -57,6 +62,30 @@
                 @endif
 
 
+            @endif
+
+            @if($user->phone)
+                <p>
+                    {{ $user->birth }}
+                </p>
+            @endif
+
+            @if($user->phone)
+            <p>
+                <a href="tel:{{ $user->phone }}">{{ $user->phone }}</a>
+            </p>
+            @endif
+
+            @if($user->phone)
+                <p>
+                    {{ $user->city }}
+                </p>
+            @endif
+
+            @if($user->website)
+                <p>
+                    {{ $user->city }}
+                </p>
             @endif
 
         </div>

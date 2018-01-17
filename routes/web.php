@@ -24,6 +24,7 @@ Route::get('/home', 'WallsController@index');
 Route::resource('/users', 'UsersController', ['except' => ['index', 'create', 'store', 'destroy']]);
 
 Route::get('/images/user-avatar/{id}/{size}', 'ImagesController@user_avatar');
+Route::get('/images/user-gallery/{user_id}/{img_id}/{size}', 'ImagesController@user_gallery');
 
 Route::resource('/friends', 'FriendsController', ['except' => ['edit', 'show', 'create']]);
 Route::get('users/{user}/friends', 'FriendsController@index');
@@ -42,3 +43,5 @@ Route::get('/wall', 'WallsController@index');
 
 Route::post('/likes', 'LikesController@add');
 Route::delete('/likes', 'LikesController@destroy');
+
+Route::resource('/users/{user_id}/gallery', 'UsersGalleryController');
