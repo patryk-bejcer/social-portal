@@ -28,8 +28,6 @@
             {{ $user->email }}
             </p>
 
-            <p><a href="{{ url('/users/') . '/' . $user->id . '/friends'  }}">Znajomi</a> <span class="label label-default">{{$user->friends()->count() }}</span></p>
-
             @if (Auth::check() && $user->id !== Auth::id())
 
                 @if ( ! friendship($user->id)->exists && ! has_friend_invitation($user->id))
@@ -90,4 +88,34 @@
 
         </div>
     </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="{{ url('/users/') . '/' . $user->id . '/friends'  }}">Znajomi</a> <span class="label label-default">{{$user->friends()->count() }}</span>
+            </div>
+
+            <div class="panel-body text-center" style="padding:10px 25px">
+
+                @if($user->friends()->count() === 0)
+                    <h4 class="text-center">Brak znajomych</h4>
+                @else
+
+                    <div class="row">
+                        @foreach ($user->friends()->slice(0, 6) as $friend)
+                            <div class="col-sm-4 text-center no-padding">
+                                <a href="{{ url('/users/' . $friend->id) }}">
+                                    <img style="padding:1px" class="img-responsive" src="{{ url('images/user-avatar/' . $friend->id) . '/200' }}" alt="">
+                                    <h6 style="min-height: 28px;">{{ $friend->name }}</h6>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+
+                @endif
+
+            </div>
+
+        </div>
 </div>
+

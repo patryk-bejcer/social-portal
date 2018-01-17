@@ -75,6 +75,10 @@ class UsersGalleryController extends Controller
      */
     public function edit($id)
     {
+        if ( ! Auth::check() ||  Auth::id() != $id  && !is_admin()) {
+            abort(403, 'Brak dostępu');
+        }
+
         $user = User::find($id);
         $images = User::find($id)->images()->paginate(18);
         return view('gallery.edit', compact('user', 'images'));
@@ -98,8 +102,12 @@ class UsersGalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
+
+        if ( ! Auth::check() ||  Auth::id() != $id  && !is_admin()) {
+            abort(403, 'Brak dostępu');
+        }
 
         foreach ($request->check_img as $id) {
             $image = Image::findOrFail($id);

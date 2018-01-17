@@ -28,9 +28,9 @@
 }
 
 .user-gallery img{
-  width: 100%;
+
   padding:1px;
-  transition: 0.5s;
+
 }
 
 .user-gallery img:hover{
@@ -55,6 +55,22 @@
 
 .img-check:hover{
   cursor: pointer;
+}
+
+.mr-1{
+  margin-right: .25em;
+}
+
+.mr-2{
+  margin-right: .5em;
+}
+
+.remove-selected-btn{
+  display: none;
+}
+
+.display-block{
+  display: block !important;
 }
 
 /*# sourceMappingURL=style.css.map */

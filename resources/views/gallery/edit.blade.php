@@ -9,10 +9,30 @@
 
                 <div class="panel-heading">
 
+                    <script>
+                        $(document).ready(function(e){
+                            $(".img-check").click(function(){
+                                $(this).toggleClass("check");
+                                if($( ".img-check" ).hasClass( "check" )){
+                                    $(".remove-selected-btn").addClass("display-block");
+                                }
+                            });
+                        });
+
+
+
+                        $(document).on('click', '.remove-selected-btn', function(e) {
+                            $("#submit-btn").trigger('click');
+                        });
+                    </script>
+
                     @if (belongs_to_auth($user->id) || is_admin())
 
-                        {{--<a href="{{ url('/users') . '/' . $user->id . '/gallery/create'}}" class="btn btn-danger pull-right"  >Usuń zaznaczone</a>--}}
-                        <a href="{{ url('/users') . '/' . $user->id . '/gallery/create'}}" class="btn btn-primary pull-right" style="margin-right:5px">Dodaj zdjęcia</a>
+                        <button class="btn btn-danger pull-right remove-selected-btn">
+                            <i class="fa fa-trash mr-2" aria-hidden="true"></i>
+                            Usuń zaznaczone</button>
+                        <a href="{{ url('/users') . '/' . $user->id . '/gallery/create'}}" class="btn btn-success pull-right" style="margin-right:5px"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Dodaj zdjęcia</a>
+                        <a href="{{ url('/users') . '/' . $user->id . '/gallery'}}" class="btn btn-primary pull-right mr-1"><i class="fa fa-chevron-left mr-2" aria-hidden="true"></i>Powrót do galerii</a>
 
                     @endif
 
@@ -37,7 +57,7 @@
                                             <div class="col-md-2 no-padding">
                                                 <label class="">
                                                     <img class="img-responsive img-check" src="{{ url('images/user-gallery/' . $user->id) . '/' . $image->id . '/350' }}" alt="">
-                                                    <input type="checkbox" name="check_img[]" id="item4" value="{{$image->id}}" class="hidden" autocomplete="off">
+                                                    <input type="checkbox" name="check_img[]" id="check_img" value="{{$image->id}}" class="hidden" autocomplete="off">
                                                 </label>
                                             </div>
                                         @endforeach
@@ -45,17 +65,9 @@
                                     </div>
 
                                     <div class="clearfix"></div>
-                                    <input type="submit" value="Usuń zaznaczone" class="btn btn-danger">
+                                <button style="display: none;" type="submit" id="submit-btn" class="btn btn-danger"><i class="fa fa-trash mr-2" aria-hidden="true"></i>
+                                    Usuń zaznaczone</button>
                             </form>
-
-                            <script>
-                                $(document).ready(function(e){
-                                    $(".img-check").click(function(){
-                                        $(this).toggleClass("check");
-                                    });
-                                });
-                            </script>
-
                         @else
 
                             <h4>Aktualnie brak zdjęć</h4>

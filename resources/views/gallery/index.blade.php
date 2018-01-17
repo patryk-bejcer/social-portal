@@ -9,7 +9,10 @@
                 <div class="panel-heading">
 
                     @if (belongs_to_auth($user->id) || is_admin())
-                    <a href="{{ url('/users') . '/' . $user->id . '/gallery/create'}}" class="btn btn-primary pull-right">Dodaj zdjęcia</a>
+
+                        <a href="{{ url('/users') . '/' . $user->id . '/gallery/edit'}}" class="btn btn-primary pull-right">Edycja galerii</a>
+                        <a href="{{ url('/users') . '/' . $user->id . '/gallery/create'}}" class="btn btn-success pull-right" style="margin-right:5px"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Dodaj zdjęcia</a>
+
                     @endif
 
                     <h4>Galeria użytkownika <a href="{{ url('/users') . '/' . $user->id }}">{{$user->name}}</a> ({{$user->images->count()}})</h4>
