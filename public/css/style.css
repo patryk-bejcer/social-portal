@@ -39,4 +39,22 @@
   width: 100%;
 }
 
+.check
+{
+  opacity:0.3;
+  color:#996;
+  border:4px solid #2579A9;
+  border-radius: 4px;
+
+
+}
+
+.img-check{
+
+}
+
+.img-check:hover{
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=style.css.map */

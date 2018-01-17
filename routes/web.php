@@ -44,4 +44,7 @@ Route::get('/wall', 'WallsController@index');
 Route::post('/likes', 'LikesController@add');
 Route::delete('/likes', 'LikesController@destroy');
 
-Route::resource('/users/{user_id}/gallery', 'UsersGalleryController');
+Route::resource('/users/{user_id}/gallery', 'UsersGalleryController',['except' => ['edit', 'show', 'destroy']]);
+
+Route::get('users/{user_id}/gallery/edit', 'UsersGalleryController@edit');
+Route::delete('users/{user_id}/gallery', 'UsersGalleryController@destroy');

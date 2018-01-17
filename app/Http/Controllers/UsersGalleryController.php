@@ -17,8 +17,8 @@ class UsersGalleryController extends Controller
     public function index($user_id)
     {
         $user = User::find($user_id);
-
-        return view('gallery.index', compact('user'));
+        $images = User::find($user_id)->images()->paginate(18);
+        return view('gallery.index', compact('user', 'images'));
     }
 
     /**
@@ -68,17 +68,6 @@ class UsersGalleryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -86,7 +75,9 @@ class UsersGalleryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $images = User::find($id)->images()->paginate(18);
+        return view('gallery.edit', compact('user', 'images'));
     }
 
     /**
@@ -107,8 +98,14 @@ class UsersGalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+
+        foreach ($request->check_img as $id) {
+            $image = Image::findOrFail($id);
+            $image->delete();
+        }
+
+        return back();
     }
 }
