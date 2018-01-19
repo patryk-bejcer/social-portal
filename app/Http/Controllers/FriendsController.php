@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\FriendRequest;
 use App\User;
 use foo\bar;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class FriendsController extends Controller
     public function index($user_id)
     {
         $user = User::findOrFail($user_id);
+
         return view('friends.index', compact('user'));
     }
 
@@ -30,10 +32,17 @@ class FriendsController extends Controller
     public function add($friend_id)
     {
         if ( ! friendship($friend_id)->exists && ! friendship($friend_id)->accepted) {
+
+
             Friend::create([
                 'user_id' => Auth::id(),
                 'friend_id' => $friend_id,
             ]);
+
+            $dane = 'daneee';
+
+            User::findOrFail($friend_id)->notify(new FriendRequest($dane));
+
         } else {
             $this->accept($friend_id);
         }

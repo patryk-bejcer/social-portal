@@ -19,8 +19,6 @@
                             });
                         });
 
-
-
                         $(document).on('click', '.remove-selected-btn', function(e) {
                             $("#submit-btn").trigger('click');
                         });

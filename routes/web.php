@@ -46,3 +46,6 @@ Route::resource('/users/{user_id}/gallery', 'UsersGalleryController',['except' =
 
 Route::get('users/{user_id}/gallery/edit', 'UsersGalleryController@edit');
 Route::delete('users/{user_id}/gallery', 'UsersGalleryController@destroy');
+
+Route::get('/notifications', 'NotificationsController@index');
+Route::patch('/notifications/{notification}', 'NotificationsController@update');

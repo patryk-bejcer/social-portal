@@ -70,6 +70,12 @@
                             <li><a href="{{ route('register') }}">Rejestracja</a></li>
                         @else
 
+                            <li>
+                                <a href="{{url('/notifications')}}">Powiadomienia
+                                    <span class="label label-danger">{{Auth::user()->unreadNotifications->count()}}</span>
+                                </a>
+                            </li>
+
                             <div class="pull-left" style="margin-top: 6px; margin-right: 5px;">
                                 <a href="{{ url('/users/' . Auth::id() )}}">
                                     <img alt="Profil" title="Profil" style="padding:1px;" class="img-responsive img-circle img-thumbnail" src="{{ url('images/user-avatar/' . Auth::id()) . '/35' }}" alt="">
@@ -84,6 +90,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('/users/' . Auth::id() )}}">{{Auth::user()->name}}</a></li>
                                     <li><a href="{{url('/wall')}}">Tablica</a></li>
+
                                     <li><a href="{{url('/users/' . Auth::id() . '/friends' )}}">Znajomi</a></li>
                                     <li><a href="{{url('/users/' . Auth::id() . '/edit' )}}">Edytuj swój profil</a></li>
 
