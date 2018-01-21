@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
 
-class FriendRequest extends Notification
+class FriendRequestSend extends Notification
 {
     use Queueable;
 
@@ -32,8 +32,7 @@ class FriendRequest extends Notification
      */
     public function via($notifiable)
     {
-//        return ['mail', 'array'];
-        return ['database'];
+        return ['mail','database'];
     }
 
     /**
@@ -44,9 +43,11 @@ class FriendRequest extends Notification
      */
     public function toMail($notifiable)
     {
+        $user_url = url('/users/' . Auth::id());
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('Masz zaproszenie do znajomych od ' . Auth::user()->name)
+                    ->action('Zobacz profil', url('/users/' . Auth::id() ))
                     ->line('Thank you for using our application!');
     }
 

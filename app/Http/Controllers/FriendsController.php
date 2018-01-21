@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Notifications\FriendRequest;
+use App\Notifications\FriendRequestRemove;
+use App\Notifications\FriendRequestSend;
+use App\Notifications\FriendRequestAccepted;
 use App\User;
 use foo\bar;
 use Illuminate\Http\Request;
@@ -41,7 +43,7 @@ class FriendsController extends Controller
 
             $dane = 'daneee';
 
-            User::findOrFail($friend_id)->notify(new FriendRequest($dane));
+            User::findOrFail($friend_id)->notify(new FriendRequestSend($dane));
 
         } else {
             $this->accept($friend_id);
@@ -66,6 +68,8 @@ class FriendsController extends Controller
             'accepted' => 1,
         ]);
 
+        User::findOrFail($friend_id)->notify(new FriendRequestAccepted());
+
         return back();
 
     }
@@ -85,6 +89,8 @@ class FriendsController extends Controller
             'user_id' => $friend_id,
             'friend_id' => Auth::id(),
         ])->delete();
+
+        User::findOrFail($friend_id)->notify(new FriendRequestRemove());
 
         return back();
     }

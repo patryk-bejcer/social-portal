@@ -73,4 +73,10 @@
   display: block !important;
 }
 
+.highlight{
+  border: 1px solid red;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 /*# sourceMappingURL=style.css.map */

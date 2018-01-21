@@ -25,3 +25,26 @@
     </div>
 </div>
 <hr style="margin-top: 0px; margin-bottom: 8px;">
+
+@section('footer')
+
+    <script>
+        $(function(){
+
+            function addHighlightClass() {
+                var hash = window.location.hash.substring(1);
+                var comment = document.getElementById(hash);
+                var $comment = $(comment).addClass('highlight highlightYellow');
+                setTimeout(function(){
+                    $comment.removeClass('highlightYellow');
+                }, 1500);
+            } addHighlightClass();
+
+            window.addEventListener('hashchange', function(){
+                addHighlightClass();
+            }, false);
+
+        });
+    </script>
+
+@endsection
