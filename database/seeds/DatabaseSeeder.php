@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         /* =============== VARIABLES =============== */
 
-        $number_of_users = 40;
+        $number_of_users = 10;
         $max_posts_per_user = 15;
         $password = 'pass';
         $max_comments_per_post = 2;

@@ -21,6 +21,10 @@
 
 
 </head>
+
+<div id="fb-root"></div>
+
+
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
@@ -113,13 +117,18 @@
             </div>
         </nav>
 
+
+
         @yield('content')
     </div>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
     @yield('footer');
+
+
 
 </body>
 </html>
