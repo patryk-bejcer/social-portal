@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,8 +13,10 @@ class PostCommented extends Notification
 {
     use Queueable;
 
-    protected $post_id;
-    protected $comment_id;
+    public $thread;
+
+    public $post_id;
+    public $comment_id;
 
     /**
      * Create a new notification instance.
@@ -24,6 +27,7 @@ class PostCommented extends Notification
     {
         $this->post_id = $post_id;
         $this->comment_id = $comment_id;
+        $this->thread=$post_id;
     }
 
     /**
@@ -34,7 +38,7 @@ class PostCommented extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -65,4 +69,16 @@ class PostCommented extends Notification
                 aby zobaczyć komentarz',
         ];
     }
+
+    public function toBroadcast($notifiable)
+    {
+        $user_url = url('/users/' . Auth::id());
+
+        return new BroadcastMessage([
+            'thread'=>$this->post_id,
+            'user'=>Auth::user(),
+        ]);
+    }
+
+
 }

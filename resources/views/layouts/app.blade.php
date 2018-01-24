@@ -19,10 +19,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 
 </head>
 
-<div id="fb-root"></div>
 
 
 <body>
@@ -74,11 +78,14 @@
                             <li><a href="{{ route('register') }}">Rejestracja</a></li>
                         @else
 
-                            <li>
-                                <a href="{{url('/notifications')}}">Powiadomienia
-                                    <span class="label label-danger">{{Auth::user()->unreadNotifications->count()}}</span>
-                                </a>
-                            </li>
+                            {{--notification--}}
+                            <notification :userid="{{Auth::id()}}" :unreads="{{Auth::user()->unreadNotifications}}"></notification>
+
+                            {{--<li>--}}
+                                {{--<a href="{{url('/notifications')}}">Powiadomienia--}}
+                                    {{--<span class="label label-danger">{{Auth::user()->unreadNotifications->count()}}</span>--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
 
                             <div class="pull-left" style="margin-top: 6px; margin-right: 5px;">
                                 <a href="{{ url('/users/' . Auth::id() )}}">
@@ -118,8 +125,8 @@
         </nav>
 
 
-
         @yield('content')
+
     </div>
 
 

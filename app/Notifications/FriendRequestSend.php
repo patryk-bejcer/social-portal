@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,7 +13,9 @@ class FriendRequestSend extends Notification
 {
     use Queueable;
 
-    protected $dane;
+    public $dane;
+    public $thread = 'test';
+    public $user = 'aaa';
 
     /**
      * Create a new notification instance.
@@ -32,7 +35,7 @@ class FriendRequestSend extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail','database', 'broadcast'];
     }
 
     /**
@@ -67,4 +70,16 @@ class FriendRequestSend extends Notification
 //            'from_user_name' => Auth::user()->name,
         ];
     }
+
+
+    public function toBroadcast($notifiable)
+    {
+        $user_url = url('/users/' . Auth::id());
+
+        return new BroadcastMessage([
+            'message' => 'Masz zaproszenie do znajomych od <a href="' . $user_url . '">' . Auth::user()->name . '</a>',
+            'send_var' => $this->dane
+        ]);
+    }
+
 }
