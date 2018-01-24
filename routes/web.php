@@ -56,6 +56,6 @@ Route::get('auth/google',   ['as' => 'auth/google',   'uses' => 'Auth\LoginContr
 Route::get('auth/google/callback',     ['as' => 'auth/google/callback',     'uses' => 'Auth\LoginController@handleGoogleCallback']);
 
 //Facebook
-Route::get('auth/facebook',   ['as' => 'auth/facebook',   'uses' => 'Auth\LoginController@redirectToFacebook']);
-Route::get('auth/facebook/callback',     ['as' => 'auth/facebook/callback',     'uses' => 'Auth\LoginController@handleFacebookCallback']);
+Route::get('auth/github',   ['as' => 'auth/github',   'uses' => 'Auth\LoginController@redirectToGithub']);
+Route::get('auth/github/callback',     ['as' => 'auth/github/callback',     'uses' => 'Auth\LoginController@handleGithubCallback']);
 

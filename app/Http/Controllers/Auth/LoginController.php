@@ -68,15 +68,58 @@ class LoginController extends Controller
 
     public function createUser($user)
     {
-        $authUser = User::where('remember_token', $user->id)->first();
+        $authUser = User::where('google_id', $user->id)->first();
 //        dd($authUser);
         if($authUser){
             return $authUser;
         }
         return User::create([
             'name' => $user->name,
+            'google_id' => $user->id,
             'email' => $user->email,
             'avatar' => $user->avatar_original,
+            'sex' => 'm',
+            'role_id' => 2,
+        ]);
+    }
+
+    // Github Login
+
+    public function redirectToGithub()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+
+    public function handleGithubCallback()
+    {
+        try{
+            $user = Socialite::driver('github')->user();
+        } catch (Exception $e) {
+            return redirect('auth/github');
+        }
+
+//        dd($user);
+
+        $authUser = $this->createUserFromGithub($user);
+
+        Auth::login($authUser, true);
+        return redirect()->route('wall');
+
+    }
+
+    public function createUserFromGithub($user)
+    {
+        $authUser = User::where('github_id', $user->id)->first();
+
+        if($authUser){
+            return $authUser;
+        }
+        return User::create([
+            'name' => $user->name,
+            'github_id' => $user->id,
+            'email' => $user->email,
+            'avatar' => $user->avatar,
             'sex' => 'm',
             'role_id' => 2,
         ]);
@@ -84,33 +127,33 @@ class LoginController extends Controller
 
     //Facebook Login
 
-    public function redirectToFacebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
+//     public function redirectToFacebook()
+//     {
+//         return Socialite::driver('facebook')->redirect();
+//     }
 
-    public function handleFacebookCallback()
-    {
-        $user = Socialite::driver('facebook')->user();
-        dd($user);
+//     public function handleFacebookCallback()
+//     {
+//         $user = Socialite::driver('facebook')->user();
+//         dd($user);
 
-    }
+//     }
 
-    public function createFbUser($user)
-    {
-        $authUser = User::where('remember_token', $user->id)->first();
-//        dd($authUser);
-        if($authUser){
-            return $authUser;
-        }
-        return User::create([
-            'name' => $user->name,
-            'email' => $user->email,
-            'avatar' => $user->avatar_original,
-            'sex' => 'm',
-            'role_id' => 2,
-        ]);
-    }
+//     public function createFbUser($user)
+//     {
+//         $authUser = User::where('remember_token', $user->id)->first();
+// //        dd($authUser);
+//         if($authUser){
+//             return $authUser;
+//         }
+//         return User::create([
+//             'name' => $user->name,
+//             'email' => $user->email,
+//             'avatar' => $user->avatar_original,
+//             'sex' => 'm',
+//             'role_id' => 2,
+//         ]);
+//     }
 
 
 }
