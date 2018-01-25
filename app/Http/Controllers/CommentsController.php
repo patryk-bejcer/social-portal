@@ -41,12 +41,15 @@ class CommentsController extends Controller
             'content' => $request->$post_id_comment_content,
         ]);
 
+        $thread = $comment;
+
 
         if(Auth::id() != $post->user_id){
             User::findOrFail($post->user_id)->notify(
                 new PostCommented(
                     $request->post_id,
-                    $comment->id)
+                    $comment->id,
+                    $thread)
             );
         }
 

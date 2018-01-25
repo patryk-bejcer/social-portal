@@ -14,7 +14,6 @@ class PostCommented extends Notification
     use Queueable;
 
     public $thread;
-
     public $post_id;
     public $comment_id;
 
@@ -23,11 +22,11 @@ class PostCommented extends Notification
      *
      * @return void
      */
-    public function __construct($post_id, $comment_id)
+    public function __construct($post_id, $comment_id, $thread)
     {
         $this->post_id = $post_id;
         $this->comment_id = $comment_id;
-        $this->thread=$post_id;
+        $this->thread=$thread;
     }
 
     /**
@@ -75,8 +74,11 @@ class PostCommented extends Notification
         $user_url = url('/users/' . Auth::id());
 
         return new BroadcastMessage([
-            'thread'=>$this->post_id,
+            'thread'=>$this->thread,
             'user'=>Auth::user(),
+            'message' => 'Użytkownik <a href="' . url('/users/' . Auth::id()) . '">' . Auth::user()->name . '</a> skomentował Twój 
+                <a href="'. url('/posts/' . $this->post_id ) . '">post</a> <br/> Kliknij <a href="'.url('/posts/' . $this->post_id . '/#comment_' . $this->comment_id ) . '">tutaj</a>
+                aby zobaczyć komentarz',
         ]);
     }
 

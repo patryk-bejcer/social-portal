@@ -14,7 +14,7 @@ class FriendRequestSend extends Notification
     use Queueable;
 
     public $dane;
-    public $thread = 'test';
+    public $thread;
     public $user = 'aaa';
 
     /**
@@ -25,6 +25,7 @@ class FriendRequestSend extends Notification
     public function __construct($dane)
     {
         $this->dane = $dane;
+        $this->thread='test';
     }
 
     /**
@@ -35,7 +36,7 @@ class FriendRequestSend extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database', 'broadcast'];
+        return ['mail','database'];
     }
 
     /**
@@ -77,6 +78,7 @@ class FriendRequestSend extends Notification
         $user_url = url('/users/' . Auth::id());
 
         return new BroadcastMessage([
+            'thread'=>$this->thread,
             'message' => 'Masz zaproszenie do znajomych od <a href="' . $user_url . '">' . Auth::user()->name . '</a>',
             'send_var' => $this->dane
         ]);

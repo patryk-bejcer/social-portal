@@ -42,7 +42,6 @@ class LoginController extends Controller
     }
 
     //Google + Login
-
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
@@ -84,7 +83,6 @@ class LoginController extends Controller
     }
 
     // Github Login
-
     public function redirectToGithub()
     {
         return Socialite::driver('github')->redirect();
@@ -98,8 +96,6 @@ class LoginController extends Controller
         } catch (Exception $e) {
             return redirect('auth/github');
         }
-
-//        dd($user);
 
         $authUser = $this->createUserFromGithub($user);
 

@@ -59,3 +59,7 @@ Route::get('auth/google/callback',     ['as' => 'auth/google/callback',     'use
 Route::get('auth/github',   ['as' => 'auth/github',   'uses' => 'Auth\LoginController@redirectToGithub']);
 Route::get('auth/github/callback',     ['as' => 'auth/github/callback',     'uses' => 'Auth\LoginController@handleGithubCallback']);
 
+Route::get('/markAsRead',function(){
+    auth()->user()->unreadNotifications->markAsRead();
+});
+

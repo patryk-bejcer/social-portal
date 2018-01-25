@@ -9,6 +9,7 @@
             <li>
                 <notification-item v-for="unread in unreadNotifications" :unread="unread"></notification-item>
             </li>
+
             <hr style="margin:0">
             <li><a href="/notifications"><small style="font-size: 10px;">Zobacz wszystkie powiadomienia</small></a></li>
         </ul>
@@ -34,10 +35,13 @@
         },
         mounted() {
             console.log('Component mounted.');
+            console.log(this.userid);
             Echo.private('App.User.' + this.userid)
                 .notification((notification) => {
                     console.log(notification);
-                    let newUnreadNotifications = {data: {thread: notification.thread, user: notification.user}};
+                    console.log(notification.message);
+                    console.log(notification.user);
+                    let newUnreadNotifications = {data: {thread: notification.thread, user: notification.user, message: notification.message, test:'testdane'}};
                     this.unreadNotifications.push(newUnreadNotifications);
                 });
         }
