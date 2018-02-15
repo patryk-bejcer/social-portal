@@ -49,6 +49,11 @@ Route::delete('users/{user_id}/gallery', 'UsersGalleryController@destroy');
 Route::get('/notifications', 'NotificationsController@index');
 Route::patch('/notifications/{notification}', 'NotificationsController@update');
 
+Route::get('events', 'EventsController@allEvents');
+Route::get('events/{user}', 'EventsController@index');
+Route::get('add-event', 'EventsController@create');
+Route::post('add-event', 'EventsController@store');
+
 // == OAuth Routes == /
 
 //Google +

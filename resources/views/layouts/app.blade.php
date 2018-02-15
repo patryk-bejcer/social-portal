@@ -103,7 +103,13 @@
                                     <li><a href="{{url('/wall')}}">Tablica</a></li>
 
                                     <li><a href="{{url('/users/' . Auth::id() . '/friends' )}}">Znajomi</a></li>
+
+                                    <li><a href="{{url('/events/' . Auth::id() )}}">Moje wydarzenia</a></li>
+
+                                    <li><a href="{{url('/events/' )}}">Wydarzenia</a></li>
+
                                     <li><a href="{{url('/users/' . Auth::id() . '/edit' )}}">Edytuj swój profil</a></li>
+
 
                                     <li>
                                         <a href="{{ route('logout') }}"

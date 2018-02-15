@@ -4,7 +4,7 @@
 
 
     <div class="col-md-1" style="padding-right: 0;">
-        <img alt="Profil" title="Profil" style="padding:1px; margin-top: 5px" class="img-responsive img-circle" src="{{ url('images/user-avatar/' . $comment->user_id . '/65') }}" alt="">
+        <img alt="Profil" title="Profil" style="padding:1px; margin-top: 5px" class="img-responsive img-circle" src="{{ asset('img/user-avatar.png')}}" alt="">
     </div>
 
     <div class="col-md-11" >

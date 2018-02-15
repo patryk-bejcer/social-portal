@@ -48181,6 +48181,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -48203,9 +48204,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         console.log('Component mounted.');
+        console.log(this.userid);
         Echo.private('App.User.' + this.userid).notification(function (notification) {
+
             console.log(notification);
-            var newUnreadNotifications = { data: { thread: notification.thread, user: notification.user } };
+
+            console.log(notification.message);
+            console.log(notification.user);
+            var newUnreadNotifications = { data: { thread: notification.thread, user: notification.user, message: notification.message, test: 'testdane' } };
             _this.unreadNotifications.push(newUnreadNotifications);
         });
     }
@@ -48270,9 +48276,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {}
+    props: ['unread'],
+    data: function data() {
+        return {
+            threadUrl: ""
+        };
+    },
+    mounted: function mounted() {
+        console.log(this.unread.data.message);
+        console.log(this.unread.data.test);
+        console.log(this.unread.data.user.name);
+    }
 });
 
 /***/ }),
@@ -48283,24 +48301,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "a",
+    { staticStyle: { "font-size": "12px" }, attrs: { href: "" } },
+    [
+      _c("span", { domProps: { innerHTML: _vm._s(_vm.unread.data.message) } }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("small", { staticClass: "text-right" }, [
+        _vm._v(_vm._s(_vm.unread.data.thread.created_at))
+      ])
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticStyle: { "font-size": "12px" }, attrs: { href: "" } },
-      [
-        _vm._v("\n    Użytkownik skomentował twój "),
-        _c("a", { attrs: { href: "/test" } }, [_vm._v("post")]),
-        _vm._v(".\n")
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -48334,8 +48349,14 @@ var render = function() {
           }
         },
         [
-          _c("span", { staticClass: "glyphicon glyphicon-globe" }),
-          _vm._v(" Powiadomienia "),
+          _c("i", {
+            staticClass: "fa fa-bell",
+            staticStyle: { "margin-rigth": "5px" }
+          }),
+          _c("span", { staticStyle: { "margin-left": "5px" } }, [
+            _vm._v("Powiadomienia")
+          ]),
+          _vm._v(" "),
           _c("span", { staticClass: "badge alert-danger" }, [
             _vm._v(_vm._s(_vm.unreadNotifications.length))
           ])

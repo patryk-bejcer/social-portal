@@ -1,8 +1,8 @@
 <template>
     <li class="dropdown" @click="markNotificationAsRead">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span class="glyphicon glyphicon-globe"></span> Powiadomienia <span
-                class="badge alert-danger">{{unreadNotifications.length}}</span>
+            <i class="fa fa-bell" style="margin-rigth:5px;"></i><span style="margin-left:5px;">Powiadomienia</span>
+            <span class="badge alert-danger">{{unreadNotifications.length}}</span>
         </a>
 
         <ul class="dropdown-menu" role="menu">
@@ -38,7 +38,10 @@
             console.log(this.userid);
             Echo.private('App.User.' + this.userid)
                 .notification((notification) => {
+
+
                     console.log(notification);
+                    
                     console.log(notification.message);
                     console.log(notification.user);
                     let newUnreadNotifications = {data: {thread: notification.thread, user: notification.user, message: notification.message, test:'testdane'}};

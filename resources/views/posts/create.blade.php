@@ -1,3 +1,5 @@
+
+
 <form action="{{ url('/posts') }}" method="POST">
     {{ csrf_field()  }}
     <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">

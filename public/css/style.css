@@ -65,6 +65,12 @@
   margin-right: .5em;
 }
 
+
+
+.mt-2{
+  margin-top:0.75em;
+}
+
 .remove-selected-btn{
   display: none;
 }
