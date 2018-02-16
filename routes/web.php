@@ -53,6 +53,9 @@ Route::get('events', 'EventsController@allEvents');
 Route::get('events/{user}', 'EventsController@index');
 Route::get('add-event', 'EventsController@create');
 Route::post('add-event', 'EventsController@store');
+Route::post('events/{event}/taking-part-event', 'EventsController@takingPartEvent');
+Route::post('events/not-taking-part-event', 'EventsController@notTakingPartEvent');
+
 
 // == OAuth Routes == /
 

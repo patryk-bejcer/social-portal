@@ -18,12 +18,12 @@ class ImagesController extends Controller
             $img = Image::make(asset('img/user-avatar.png'))->fit($size)->response('png', 100);
         } else {
             if (strpos($user->avatar, 'http') !== false){
-//                $img = Image::make($user->avatar)->fit($size)->response('jpg', 90);
-	            $img = Image::make(asset('img/user-avatar.png'))->fit($size)->response('png', 100);
+                $img = Image::make($user->avatar)->fit($size)->response('jpg', 90);
+//	            $img = Image::make(asset('img/user-avatar.png'))->fit($size)->response('png', 100);
             } else {
                 $avatar_path = asset('storage/users/' . $id . '/avatars/' . $user->avatar);
-//                $img = Image::make($avatar_path)->fit($size)->response('jpg', 90);
-                $img = Image::make(asset('img/user-avatar.png'))->fit($size)->response('png', 100);
+                $img = Image::make($avatar_path)->fit($size)->response('jpg', 90);
+//                $img = Image::make(asset('img/user-avatar.png'))->fit($size)->response('png', 100);
             }
         }
 

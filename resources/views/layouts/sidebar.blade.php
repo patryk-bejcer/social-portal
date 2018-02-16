@@ -117,5 +117,36 @@
             </div>
 
         </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a href="{{ url('/users/') . '/' . $user->id . '/events'  }}">Wydarzenia użytkownika</a> <span class="label label-default">{{$user->events->count() }}</span>
+        </div>
+
+        <div class="panel-body text-center" style="padding:10px 25px">
+
+            @if($user->events->count() === 0)
+                <h4 class="text-center">Brak znajomych</h4>
+            @else
+
+                <div class="row">
+                    @foreach ($user->events as $event)
+                        <div class="">
+                            <a href="">
+                                <img class="img-responsive" src="http://www.tcogflga.org/wp-content/uploads/2018/01/Univen-UpcomingEventsBanner.jpg" alt="">
+                                <h5 class="text-left">{{$event->title}}</h5>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+            @endif
+
+        </div>
+
+    </div>
+
+
 </div>
+
 

@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'user_permission' => \App\Http\Middleware\CheckUserPermission::class,
         'post_permission' => \App\Http\Middleware\CheckPostPermission::class,
         'comment_permission' => \App\Http\Middleware\CheckCommentsPermission::class,
+        'event_permission' => \App\Http\Middleware\CheckEventPermission::class,
     ];
 }

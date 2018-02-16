@@ -1,6 +1,7 @@
 <?php
 
 use App\Friend;
+use App\EventAttendance;
 
 function friendship($friend_id)
 {
@@ -40,6 +41,15 @@ function belongs_to_auth($user_id){
 
 function is_admin(){
     return (Auth::check() && Auth::user()->role->type === 'admin');
+}
+
+function has_user_attendance_event($event_id)
+{
+    return EventAttendance::where([
+        'user_id' => Auth::id(),
+        'event_id' => $event_id,
+    ])->exists();
+
 }
 
 
