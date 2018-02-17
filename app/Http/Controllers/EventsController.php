@@ -114,7 +114,9 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        //
+    	$event = Event::findOrFail($id);
+
+        return view('events.edit', compact('event'));
     }
 
     /**
@@ -124,9 +126,34 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Event $event)
     {
-        //
+	    $this->validate($request,[
+		    'title' => 'required|min:5',
+		    'place' => 'required|min:5',
+	    ], [
+		    'required' => 'Pole jest wymagane',
+		    'min' => 'Pole musi mieć minimum :min znaków',
+	    ]);
+
+	    $event = Event::where([
+		    'id' => $id,
+	    ]);
+
+	    $event->update([
+		    'user_id' => Auth::id(),
+		    'title'   => $request->title,
+		    'place'   => $request->place,
+		    'start_date'   => $request->start_date,
+		    'end_date'   => $request->end_date,
+		    'visibility'   => $request->visibility,
+		    'description'   => $request->description,
+		    'website'   => $request->website,
+		    'event_img'   => $request->event_img
+	    ]);
+
+	    return back();
+
     }
 
     /**

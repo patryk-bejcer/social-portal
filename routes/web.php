@@ -51,6 +51,8 @@ Route::patch('/notifications/{notification}', 'NotificationsController@update');
 
 Route::get('events', 'EventsController@allEvents');
 Route::get('events/{user}', 'EventsController@index');
+Route::get('event/{id}/edit', 'EventsController@edit');
+Route::patch('event/{event_id}/edit', 'EventsController@update');
 Route::get('add-event', 'EventsController@create');
 Route::post('add-event', 'EventsController@store');
 Route::post('events/{event}/taking-part-event', 'EventsController@takingPartEvent');

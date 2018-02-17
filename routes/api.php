@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('/comments', 'CommentsController', ['except' => ['index', 'create']]);
+
+Route::post('api/likes', 'LikesController@like');
+Route::delete('api/likes', 'LikesController@destroy');
